@@ -17,7 +17,7 @@
     </div>
 
 <div class="table-responsive">
-        <a class="btn btn-primary" href="/tickets/create">Add New Ticket</a>
+        <a class="btn btn-dark" href="/tickets/addnew">New Ticket</a>
       <table class="table table-striped table-sm">
         <thead>
           <tr>

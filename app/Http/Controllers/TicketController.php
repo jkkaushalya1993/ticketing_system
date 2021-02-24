@@ -24,9 +24,9 @@ class TicketController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function addnew()
     {
-        return view('tickets.create');
+        return view('tickets.addnew');
     }
     
     public function delete(Ticket $ticket)

@@ -24,8 +24,8 @@
       </div>
 
       <div class="form-group">
-          <label for="description">Description</label>
-          <input type="text" id="description" name="description" class="form-control"/>
+          <label for="description">Details</label>
+          <input type="text" id="details" name="details" class="form-control"/>
         </div>
 
         <div class="form-group">
@@ -37,8 +37,8 @@
             </select>
           </div>
 
-          <button class="btn btn-primary" type="submit">Add</button>
-        <a href="{{route('tickets.index')}}" class="btn btn-secondary" type="submit">Back</a>
+          <button class="btn btn-dark" type="submit">Create ticket</button>
+        <a href="{{route('tickets.index')}}" class="btn btn-dark" type="submit">Back</a>
     </form>
 
   </main>
