@@ -74,7 +74,7 @@ class TicketController extends Controller
             'priority' => $request->input('priority'),
         ]);
         
-      //  $mailer->sendTicketInformation(Auth::user(), $ticket);
+        $mailer->sendTicketInformation(Auth::user(), $ticket);
         
         return redirect()->route('tickets.userTickets');
     }

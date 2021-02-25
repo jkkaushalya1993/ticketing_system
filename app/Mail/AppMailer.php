@@ -53,6 +53,7 @@ class AppMailer
     }
     public function deliver()
     {
+        
         $this->mailer->send($this->view, $this->data, function($message){
             $message->from($this->fromAddress, $this->fromName)
             ->to($this->to)->subject($this->subject);

@@ -12,7 +12,7 @@ Route::get('/tickets/addnew','App\Http\Controllers\TicketController@addnew')->na
 Route::get('/tickets/{ticket}','App\Http\Controllers\TicketController@display')->name('tickets.display');
 Route::post('/tickets/{ticket}','App\Http\Controllers\TicketController@update')->name('tickets.update');
 Route::post('/tickets/remove/{ticket}','App\Http\Controllers\TicketController@destroy')->name('tickets.destroy');
-
+Route::get('/logout', '\App\Http\Controllers\Auth\LoginController@logout');
 Route::get('/my_tickets', 'App\Http\Controllers\TicketController@userTickets')->name('tickets.userTickets');
 
 Route::post('/comment', 'App\Http\Controllers\CommentsController@postComment');
