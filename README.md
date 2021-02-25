@@ -1,6 +1,6 @@
 # A basic ticketing system using Laravel 8
 
-# Features
+## Features
 
 * Add/delete/update tickets
 * User distinguished ticket viewing
