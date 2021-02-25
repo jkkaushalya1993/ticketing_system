@@ -20,12 +20,26 @@
       {{ csrf_field()}}
       <div class="form-group">
         <label for="summary">Summary</label>
-        <input type="text" id="summary" name="summary" class="form-control" value="{{$ticket->summary}}"/>
+        <input type="text" id="summary" name="summary" class="form-control {{ $errors->has('summary') ? 'is-invalid':'' }}" value="{{ old('summary', $ticket->summary)}}"/>
+     
+      @if($errors->has('summary'))
+      <span class = 'help-block'>
+ 		      <strong> {{$errors->first('summary') }}</strong>
+      </span>
+      @endif
+     
       </div>
 
       <div class="form-group">
         <label for="description">Description</label>
-        <input type="text" id="description" name="details" class="form-control" value="{{$ticket->details}}"/>
+        <input type="text" id="details" name="details" class="form-control {{ $errors->has('details') ? 'is-invalid':'' }}" value="{{ old('details', $ticket->details)}}"/>
+      
+      @if($errors->has('details'))
+      <span class = 'help-block'>
+ 		      <strong> {{$errors->first('details') }}</strong>
+      </span>
+      @endif
+      
       </div>
 
       <div class="form-group">

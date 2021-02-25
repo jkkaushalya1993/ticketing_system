@@ -42,11 +42,13 @@ class TicketController extends Controller
      */
     public function store(Request $request)
     {
+       
         Ticket::create([
             'summary'=>request('summary'),
             'details'=>request('details'),
             'status'=>request('status')
         ]);
+        
         
         return redirect()->route('tickets.index');
     }
@@ -80,8 +82,13 @@ class TicketController extends Controller
      * @param  \App\Ticket  $ticket
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Ticket $ticket)
+    public function update(Request $request, Ticket $ticket)    
     {
+        $request->validate([          
+            'summary' => 'required',
+            'details' => 'required'
+        ]);
+        
         $ticket->summary = request('summary');
         $ticket->details = request('details');
         $ticket->status = request('status');

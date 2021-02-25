@@ -7,10 +7,12 @@ Route::get('/', function () {
 
 Route::get('/tickets/','App\Http\Controllers\TicketController@index')->name('tickets.index');
 Route::get('/tickets/remove/{ticket}','App\Http\Controllers\TicketController@remove')->name('tickets.remove');
+Route::post('/tickets/addnew','App\Http\Controllers\TicketController@store')->name('tickets.store');
 Route::get('/tickets/addnew','App\Http\Controllers\TicketController@addnew')->name('tickets.addnew');
 Route::get('/tickets/{ticket}','App\Http\Controllers\TicketController@display')->name('tickets.display');
 Route::post('/tickets/{ticket}','App\Http\Controllers\TicketController@update')->name('tickets.update');
 Route::post('/tickets/remove/{ticket}','App\Http\Controllers\TicketController@destroy')->name('tickets.destroy');
+
 
 
 // Route::post('/tickets/create1','TicketController@store')->name('tickets.store');
