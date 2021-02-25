@@ -33,6 +33,14 @@ class LoginController extends Controller
      *
      * @return void
      */
+    
+    public function authenticated()
+    {
+       
+        
+        return redirect()->route('tickets.userTickets');
+    }
+    
     public function __construct()
     {
         $this->middleware('guest')->except('logout');
