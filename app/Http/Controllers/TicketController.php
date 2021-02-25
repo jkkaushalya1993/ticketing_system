@@ -8,6 +8,7 @@ use Illuminate\Support\Str;
 
 use App\Category;
 use Illuminate\Support\Facades\Auth;
+use App\Mail\AppMailer;
 
 class TicketController extends Controller
 {
@@ -56,14 +57,14 @@ class TicketController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request, AppMailer $mailer)
     {
         $request->validate([
             'summary' => 'required',
             'details' => 'required'
         ]);
         
-        Ticket::create([
+        $ticket = Ticket::create([
             'summary'=>request('summary'),
             'details'=>request('details'),
             'status'=>request('status'),
@@ -73,6 +74,7 @@ class TicketController extends Controller
             'priority' => $request->input('priority'),
         ]);
         
+      //  $mailer->sendTicketInformation(Auth::user(), $ticket);
         
         return redirect()->route('tickets.userTickets');
     }

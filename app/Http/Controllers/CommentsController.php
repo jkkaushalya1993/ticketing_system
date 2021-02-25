@@ -5,83 +5,31 @@ namespace App\Http\Controllers;
 use App\Models\Comments;
 use Illuminate\Http\Request;
 
+
+
+use App\Models\Comment;
+use App\Mail\AppMailer;
+use Illuminate\Support\Facades\Auth;
+
 class CommentsController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    
-    public function __construct() { $this->middleware('auth'); }
-    public function index()
+    public function postComment(Request $request, AppMailer $mailer)
     {
-        //
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Comments  $comments
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Comments $comments)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Comments  $comments
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Comments $comments)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Comments  $comments
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, Comments $comments)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Comments  $comments
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Comments $comments)
-    {
-        //
+        $this->validate($request, [
+            'comment' => 'required'
+        ]);
+        
+        $comment = Comment::create([
+            'ticket_id' => $request->input('ticket_id'),
+            'user_id' => Auth::user()->id,
+            'comment' => $request->input('comment')
+        ]);
+        
+        // send mail if the user commenting is not the ticket owner
+        if($comment->ticket->user->id !== Auth::user()->id) {
+            $mailer->sendTicketComments($comment->ticket->user, Auth::user(), $comment->ticket, $comment);
+        }
+        
+        return redirect()->back()->with("status", "Your comment has be submitted.");
     }
 }
