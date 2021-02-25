@@ -1,17 +1,21 @@
 @extends('layouts.main')
 
-@section('content')
-<main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
-    <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-      <h1 class="h2">Tickets summary</h1>
-    
-    </div>
 
-<div class="table-responsive">
- <a class="btn btn-dark" href="/tickets/addnew">New Ticket</a>
-                    @if($tickets->isEmpty())
-                        <p>No tickets available yet.</p>
-                        
+@section('summary', 'My Tickets')
+
+
+@section('content')
+
+<div class="row">
+        <div class="col-md-10 col-md-offset-1">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <i class="fa fa-ticket"> My Tickets</i>
+                </div>
+                <a class="btn btn-dark" href="/tickets/addnew">New Ticket</a>
+                @if($tickets->isEmpty())
+                        <p>You have not created any tickets yet.</p>
+                         
                     @else
        
       <table class="table table-striped table-sm">

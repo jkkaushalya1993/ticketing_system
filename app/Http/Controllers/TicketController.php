@@ -4,6 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Models\Ticket;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
+
+use App\Category;
+use Illuminate\Support\Facades\Auth;
 
 class TicketController extends Controller
 {
@@ -12,9 +16,21 @@ class TicketController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    public function __construct() { $this->middleware('auth'); }
+   
+ 
+    
+    public function userTickets()
+    {
+        $tickets = Ticket::where('user_id', Auth::user()->id)->paginate(10);
+        return view('tickets.user_tickets', compact('tickets'));
+    }
+    
     public function index()
     {
-        $tickets = Ticket::latest()->get();
+    
+        $tickets = Ticket::paginate(10);
+       // $tickets = Ticket::latest()->get();
         return view('tickets.index', compact('tickets'));
       #  return view('tickets.index');
     }
@@ -42,15 +58,23 @@ class TicketController extends Controller
      */
     public function store(Request $request)
     {
-       
+        $request->validate([
+            'summary' => 'required',
+            'details' => 'required'
+        ]);
+        
         Ticket::create([
             'summary'=>request('summary'),
             'details'=>request('details'),
-            'status'=>request('status')
+            'status'=>request('status'),
+            'user_id' => Auth::user()->id,
+            'category_id' => 1,
+            'ticket_id' => strtoupper(Str::random(10)),
+            'priority' => $request->input('priority'),
         ]);
         
         
-        return redirect()->route('tickets.index');
+        return redirect()->route('tickets.userTickets');
     }
     
     /**
@@ -92,9 +116,10 @@ class TicketController extends Controller
         $ticket->summary = request('summary');
         $ticket->details = request('details');
         $ticket->status = request('status');
+        
         $ticket->save();
         
-        return redirect()->route('tickets.index');
+        return redirect()->route('tickets.userTickets');
     }
     
     /**

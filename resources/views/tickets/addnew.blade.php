@@ -20,12 +20,24 @@
       {{ csrf_field()}}
       <div class="form-group">
         <label for="summary">Summary</label>
-        <input type="text" id="summary" name="summary" class="form-control"/>
+        <input type="text" id="summary" name="summary" class="form-control {{ $errors->has('summary') ? 'is-invalid':'' }}" value="{{ old('summary')}}"/>
+     
+      @if($errors->has('summary'))
+      <span class = 'help-block'>
+ 		      <strong> {{$errors->first('summary') }}</strong>
+      </span>
+      @endif
       </div>
 
       <div class="form-group">
           <label for="description">Details</label>
-          <input type="text" id="details" name="details" class="form-control"/>
+          <input type="text" id="details" name="details" class="form-control {{ $errors->has('details') ? 'is-invalid':'' }}" value="{{ old('details')}}"/>
+      
+      @if($errors->has('details'))
+      <span class = 'help-block'>
+ 		      <strong> {{$errors->first('details') }}</strong>
+      </span>
+      @endif
         </div>
 
         <div class="form-group">
@@ -36,6 +48,17 @@
               <option value="Closed">Closed</option>
             </select>
           </div>
+          
+          <div class="form-group">
+            <label for="category">Priority</label>
+            <select class="form-control" id="priority" name="priority">
+              <option value="low">Low</option>
+              <option value="medium">Medium</option>
+              <option value="high">High</option>
+            </select>
+          </div>
+          
+          
 
           <button class="btn btn-dark" type="submit">Create ticket</button>
         <a href="{{route('tickets.index')}}" class="btn btn-dark" type="submit">Back</a>
