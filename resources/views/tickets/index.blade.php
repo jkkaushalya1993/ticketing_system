@@ -35,8 +35,8 @@
             <td>{{ $ticket->summary }}</td>
             <td>{{ $ticket->details }}</td>
             <td>{{ $ticket->status }}</td>
-            <td><a href="/tickets/{{$ticket->id}}" class="btn btn-primary">Update</a></td>
-            <td><a href="/tickets/delete/{{$ticket->id}}" class="btn btn-danger">Delete</a></td>
+            <td><a href="/tickets/{{$ticket->id}}" class="btn btn-secondary">Edit</a></td>
+            <td><a href="/tickets/remove/{{$ticket->id}}" class="btn btn-warning">Remove</a></td>
           </tr>
           @endforeach
         </tbody>

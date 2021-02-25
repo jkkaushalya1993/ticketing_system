@@ -29,9 +29,9 @@ class TicketController extends Controller
         return view('tickets.addnew');
     }
     
-    public function delete(Ticket $ticket)
+    public function remove(Ticket $ticket)
     {
-        return view('tickets.delete', compact('ticket'));
+        return view('tickets.remove', compact('ticket'));
     }
     
     /**
@@ -57,9 +57,9 @@ class TicketController extends Controller
      * @param  \App\Ticket  $ticket
      * @return \Illuminate\Http\Response
      */
-    public function show(Ticket $ticket)
+    public function display(Ticket $ticket)
     {
-        return view('tickets.show', compact('ticket'));
+        return view('tickets.display', compact('ticket'));
     }
     
     /**

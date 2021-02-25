@@ -25,7 +25,7 @@
 
       <div class="form-group">
           <label for="description">Description</label>
-          <input type="text" id="description" name="description" class="form-control" value="{{$ticket->description}}" disabled/>
+          <input type="text" id="description" name="details" class="form-control" value="{{$ticket->details}}" disabled/>
         </div>
 
         <div class="form-group">
