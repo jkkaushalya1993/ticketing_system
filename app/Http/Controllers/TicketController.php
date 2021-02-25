@@ -133,6 +133,6 @@ class TicketController extends Controller
     public function destroy(Ticket $ticket)
     {
         $ticket->delete();
-        return redirect()->route('tickets.index');
+        return redirect()->route('tickets.userTickets');
     }
 }
